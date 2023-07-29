@@ -23,14 +23,11 @@ public class ExcelUtility {
 
 	public FileInputStream fi;
 	public FileOutputStream fo;
-	//public XSSFWorkbook workbook;
-	//public XSSFSheet sheet;
-	//public XSSFRow row;
-	//public XSSFCell cell;
-	public HSSFWorkbook workbook;
-	public HSSFSheet sheet;
-	public HSSFRow row;
-	public HSSFCell cell;
+	public XSSFWorkbook workbook;
+	public XSSFSheet sheet;
+	public XSSFRow row;
+	public XSSFCell cell;
+	
 	public CellStyle style;   
 	String path;
 	
@@ -42,7 +39,7 @@ public class ExcelUtility {
 	public int getRowCount(String sheetName) throws IOException 
 	{
 		fi=new FileInputStream(path);
-		workbook=new HSSFWorkbook(fi);
+		workbook=new XSSFWorkbook(fi);
 		sheet=workbook.getSheet(sheetName);
 		int rowcount=sheet.getLastRowNum();
 		workbook.close();
@@ -53,7 +50,7 @@ public class ExcelUtility {
 	public int getCellCount(String sheetName,int rownum) throws IOException
 	{
 		fi=new FileInputStream(path);
-		workbook=new HSSFWorkbook(fi);
+		workbook=new XSSFWorkbook(fi);
 		sheet=workbook.getSheet(sheetName);
 		row=sheet.getRow(rownum);
 		int cellcount=row.getLastCellNum();
@@ -66,7 +63,7 @@ public class ExcelUtility {
 	public String getCellData(String sheetName,int rownum,int colnum) throws IOException
 	{
 		fi=new FileInputStream(path);
-		workbook=new HSSFWorkbook(fi);
+		workbook=new XSSFWorkbook(fi);
 		sheet=workbook.getSheet(sheetName);
 		row=sheet.getRow(rownum);
 		cell=row.getCell(colnum);
@@ -90,13 +87,13 @@ public class ExcelUtility {
 		File xlfile=new File(path);
 		if(!xlfile.exists())    // If file not exists then create new file
 		{
-		workbook=new HSSFWorkbook();
+		workbook=new XSSFWorkbook();
 		fo=new FileOutputStream(path);
 		workbook.write(fo);
 		}
 				
 		fi=new FileInputStream(path);
-		workbook=new HSSFWorkbook(fi);
+		workbook=new XSSFWorkbook(fi);
 			
 		if(workbook.getSheetIndex(sheetName)==-1) // If sheet not exists then create new Sheet
 			workbook.createSheet(sheetName);
@@ -119,7 +116,7 @@ public class ExcelUtility {
 	public void fillGreenColor(String sheetName,int rownum,int colnum) throws IOException
 	{
 		fi=new FileInputStream(path);
-		workbook=new HSSFWorkbook(fi);
+		workbook=new XSSFWorkbook(fi);
 		sheet=workbook.getSheet(sheetName);
 		
 		row=sheet.getRow(rownum);
@@ -141,7 +138,7 @@ public class ExcelUtility {
 	public void fillRedColor(String sheetName,int rownum,int colnum) throws IOException
 	{
 		fi=new FileInputStream(path);
-		workbook=new HSSFWorkbook(fi);
+		workbook=new XSSFWorkbook(fi);
 		sheet=workbook.getSheet(sheetName);
 		row=sheet.getRow(rownum);
 		cell=row.getCell(colnum);
